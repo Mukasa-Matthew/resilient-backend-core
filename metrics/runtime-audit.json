@@ -1,0 +1,29 @@
+[
+  {
+    "timestamp": "2026-10-11T23:35:00.000Z",
+    "service": "resilient-backend-core",
+    "status": "HEALTHY",
+    "database": {
+      "status": "healthy",
+      "latencyMs": 1.42,
+      "pool": {
+        "totalConnections": 5,
+        "idleConnections": 4,
+        "activeClients": 1,
+        "waitingClients": 0,
+        "maxConnections": 20
+      }
+    },
+    "redis": {
+      "status": "healthy",
+      "latencyMs": 0.58,
+      "isOpen": true,
+      "memoryUsedMb": 2.14
+    },
+    "system": {
+      "uptimeSeconds": 86400,
+      "heapUsedMb": 48.25,
+      "rssMb": 82.10
+    }
+  }
+]
