@@ -104,7 +104,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "Opening pull request for ${BRANCH_NAME} into main..."
-          PR_URL=$(gh pr create \
+          if ! PR_URL=$(gh pr create \
             --base main \
             --head "${BRANCH_NAME}" \
             --title "ops(telemetry): runtime health & latency snapshot (${BRANCH_NAME})" \
@@ -113,9 +113,16 @@ jobs:
           ### Highlights:
           - Appended timestamped PostgreSQL pool and Redis latency metrics to \`metrics/runtime-audit.json\`.
           - Database and Redis dependency health checks passed with nominal latencies.
-          - Event loop and process memory parameters within standard thresholds.")
+          - Event loop and process memory parameters within standard thresholds." 2>&1); then
+            if echo "${PR_URL}" | grep -qi "not permitted to create or approve pull requests"; then
+              echo "::warning::GitHub Actions cannot create PRs in this repository. Skipping PR and merge steps."
+              echo "${PR_URL}"
+              exit 0
+            fi
+            echo "${PR_URL}"
+            exit 1
+          fi
 
           echo "Pull request opened: ${PR_URL}"
-          
           echo "Enabling auto-merge for ${PR_URL}..."
           gh pr merge --auto --merge "${PR_URL}" || gh pr merge --merge "${PR_URL}"
