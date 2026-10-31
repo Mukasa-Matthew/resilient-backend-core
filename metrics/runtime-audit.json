@@ -25,5 +25,32 @@
       "heapUsedMb": 48.25,
       "rssMb": 82.10
     }
+  },
+  {
+    "timestamp": "2026-10-31T04:43:05Z",
+    "service": "resilient-backend-core",
+    "status": "HEALTHY",
+    "database": {
+      "status": "healthy",
+      "latencyMs": 1.87,
+      "pool": {
+        "totalConnections": 8,
+        "idleConnections": 6,
+        "activeClients": 2,
+        "waitingClients": 0,
+        "maxConnections": 20
+      }
+    },
+    "redis": {
+      "status": "healthy",
+      "latencyMs": 0.65,
+      "isOpen": true,
+      "memoryUsedMb": 2.45
+    },
+    "system": {
+      "uptimeSeconds": 172800,
+      "heapUsedMb": 55.13,
+      "rssMb": 88.40
+    }
   }
 ]
